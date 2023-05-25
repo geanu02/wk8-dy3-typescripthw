@@ -1,4 +1,5 @@
 # Not Another Cart Project
+
 ## Step 1: Create A Typescript Project
 - Create a node project but intializing npm your your project's folder
 - Make it a Typescript Project by install TypeScript
