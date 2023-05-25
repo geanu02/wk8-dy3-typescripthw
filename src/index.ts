@@ -36,6 +36,7 @@ function createItem(name: string, price: number, description: string): Item {
 
 function addToCart(item: Item, user: User): void {
     user.cart.push(item)
+    console.log(`Added 1 ${item.name} to Cart.`)
 }
 
 function removeFromCart(item: Item, user: User): void {
@@ -45,6 +46,7 @@ function removeFromCart(item: Item, user: User): void {
         let idx = user.cart.indexOf(item)
         user.cart.splice(idx, 1)
     }
+    console.log(`Removed all (${countItems}) ${item.name} from Cart.`)
 }
 
 function removeQuantityFromCart(item: Item, user: User, qtyRemove: number): void {
@@ -52,13 +54,25 @@ function removeQuantityFromCart(item: Item, user: User, qtyRemove: number): void
         let idx = user.cart.indexOf(item)
         user.cart.splice(idx, 1)
     }
+    console.log(`Removed ${qtyRemove} ${item.name} from Cart.`)
 }
+
+const formatterUSD = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  
+    // These options are needed to round to whole numbers if that's what you want.
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
 
 function cartTotal(user: User): number {
     let totalCart: number = 0
     for (let item of user.cart) {
         totalCart += item.price
     }
+    // Optional: Just to know if totalCart is correct
+    console.log(`Cart Total: ${formatterUSD.format(totalCart)}`)
     return totalCart
 }
 
@@ -75,7 +89,8 @@ function printCart(user: User): void {
             cartItems[cartItem.name] = 1
         }
     }
-    console.log(cartItems)
+
+    console.log("Cart:", cartItems)
 }
 
 function driver(): void {
@@ -85,23 +100,23 @@ function driver(): void {
     const item3 = createItem("Banana", 0.75, "Peruvian Banana")
     addToCart(item1, user1)
     printCart(user1)
-    console.log(cartTotal(user1))
+    cartTotal(user1)
     addToCart(item2, user1)
     addToCart(item2, user1)
     addToCart(item2, user1)
     printCart(user1)
-    console.log(cartTotal(user1))
+    cartTotal(user1)
     addToCart(item3, user1)
     addToCart(item3, user1)
     addToCart(item3, user1)
     printCart(user1)
-    console.log(cartTotal(user1))
+    cartTotal(user1)
     removeFromCart(item2, user1)
     printCart(user1)
-    console.log(cartTotal(user1))
+    cartTotal(user1)
     removeQuantityFromCart(item3, user1, 2)
     printCart(user1)
-    console.log(cartTotal(user1))
+    cartTotal(user1)
 }
 
 driver()
