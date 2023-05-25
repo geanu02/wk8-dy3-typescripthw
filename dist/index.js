@@ -27,6 +27,7 @@ function removeFromCart(item, user) {
         if (cartItem == item) {
             let idx = user.cart.indexOf(item);
             user.cart.splice(idx, 1);
+            console.log(`${idx} ${item.id}`);
         }
     }
 }
@@ -34,7 +35,6 @@ function removeQuantityFromCart(item, user, qtyRemove) {
     for (let i = 0; i < qtyRemove; i++) {
         let idx = user.cart.indexOf(item);
         user.cart.splice(idx, 1);
-        console.log(`${idx} ${item.id}`);
     }
 }
 function cartTotal(user) {
@@ -45,9 +45,15 @@ function cartTotal(user) {
     return totalCart;
 }
 function printCart(user) {
-    let cartItems = "";
+    let cartItems = {};
     for (let cartItem of user.cart) {
-        cartItems += cartItem.name + ", ";
+        // let currentCart: string = cartItem.name
+        if (cartItem.name in cartItems) {
+            cartItems[cartItem.name] += 1;
+        }
+        else {
+            cartItems[cartItem.name] = 1;
+        }
     }
     console.log(cartItems);
 }
@@ -58,23 +64,23 @@ function driver() {
     const item3 = createItem("Banana", 0.75, "Peruvian Banana");
     addToCart(item1, user1);
     printCart(user1);
-    cartTotal(user1);
+    console.log(cartTotal(user1));
     addToCart(item2, user1);
     addToCart(item2, user1);
     addToCart(item2, user1);
     printCart(user1);
-    cartTotal(user1);
+    console.log(cartTotal(user1));
     addToCart(item3, user1);
     addToCart(item3, user1);
     addToCart(item3, user1);
     printCart(user1);
-    cartTotal(user1);
+    console.log(cartTotal(user1));
     removeFromCart(item2, user1);
     printCart(user1);
-    cartTotal(user1);
+    console.log(cartTotal(user1));
     removeQuantityFromCart(item3, user1, 2);
     printCart(user1);
-    cartTotal(user1);
+    console.log(cartTotal(user1));
 }
 driver();
 //# sourceMappingURL=index.js.map
