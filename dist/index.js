@@ -23,12 +23,11 @@ function addToCart(item, user) {
     user.cart.push(item);
 }
 function removeFromCart(item, user) {
-    for (let cartItem of user.cart) {
-        if (cartItem == item) {
-            let idx = user.cart.indexOf(item);
-            user.cart.splice(idx, 1);
-            console.log(`${idx} ${item.id}`);
-        }
+    let countItems = 0;
+    user.cart.forEach(e => e == item ? countItems++ : '');
+    for (let i = 0; i < countItems; i++) {
+        let idx = user.cart.indexOf(item);
+        user.cart.splice(idx, 1);
     }
 }
 function removeQuantityFromCart(item, user, qtyRemove) {
@@ -47,7 +46,6 @@ function cartTotal(user) {
 function printCart(user) {
     let cartItems = {};
     for (let cartItem of user.cart) {
-        // let currentCart: string = cartItem.name
         if (cartItem.name in cartItems) {
             cartItems[cartItem.name] += 1;
         }

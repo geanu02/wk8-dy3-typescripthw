@@ -39,12 +39,11 @@ function addToCart(item: Item, user: User): void {
 }
 
 function removeFromCart(item: Item, user: User): void {
-    for (let cartItem of user.cart) {
-        if (cartItem == item) {
-            let idx = user.cart.indexOf(item)
-            user.cart.splice(idx, 1)
-            console.log(`${idx} ${item.id}`)
-        }
+    let countItems: number = 0
+    user.cart.forEach(e => e == item ? countItems++ : '')
+    for (let i = 0; i < countItems; i++) {
+        let idx = user.cart.indexOf(item)
+        user.cart.splice(idx, 1)
     }
 }
 
@@ -70,14 +69,13 @@ interface idxSign {
 function printCart(user: User): void {
     let cartItems: idxSign = {}
     for (let cartItem of user.cart) {
-        // let currentCart: string = cartItem.name
         if (cartItem.name in cartItems) {
             cartItems[cartItem.name] += 1
         } else {
             cartItems[cartItem.name] = 1
         }
     }
-    console.log(`Cart: ${cartItems}`)
+    console.log(cartItems)
 }
 
 function driver(): void {
