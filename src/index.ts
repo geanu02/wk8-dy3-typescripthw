@@ -51,6 +51,7 @@ function removeQuantityFromCart(item: Item, user: User, qtyRemove: number): void
     for (let i = 0; i < qtyRemove; i++) {
         let idx = user.cart.indexOf(item)
         user.cart.splice(idx, 1)
+        console.log(`${idx} ${item.id}`)
     }
 }
 

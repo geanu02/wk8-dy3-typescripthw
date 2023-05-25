@@ -34,6 +34,7 @@ function removeQuantityFromCart(item, user, qtyRemove) {
     for (let i = 0; i < qtyRemove; i++) {
         let idx = user.cart.indexOf(item);
         user.cart.splice(idx, 1);
+        console.log(`${idx} ${item.id}`);
     }
 }
 function cartTotal(user) {
