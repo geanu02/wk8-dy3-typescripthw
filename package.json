@@ -1,0 +1,17 @@
+{
+  "name": "day3-hw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node ./dist/index.js"
+  },
+  "author": "geanu",
+  "license": "MIT",
+  "dependencies": {
+    "@types/uuid": "^9.0.1",
+    "typescript": "^5.0.4",
+    "uuid": "^9.0.0"
+  }
+}
